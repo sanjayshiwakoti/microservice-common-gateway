@@ -54,5 +54,4 @@ router.get('/', (req, res) => {
 
 router.use('/', gatewayController);
 
-
 export default router;

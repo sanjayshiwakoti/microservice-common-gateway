@@ -17,9 +17,9 @@ export const authenticate = (req, res, next) => {
 
   authService
     .authenticate(accessToken)
-    .then((response) => {
+    .then(response => {
       req.clientGatewayURL = response.clientGatewayURL;
-      next()
+      next();
     })
     .catch(() => {
       // TODO handle error
