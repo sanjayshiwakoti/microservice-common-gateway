@@ -17,7 +17,10 @@ export const authenticate = (req, res, next) => {
 
   authService
     .authenticate(accessToken)
-    .then(() => next())
+    .then((response) => {
+      req.clientGatewayURL = response.clientGatewayURL;
+      next()
+    })
     .catch(() => {
       // TODO handle error
       res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Unauthorized' });
