@@ -18,6 +18,7 @@ export const authenticate = (req, res, next) => {
   authService
     .authenticate(accessToken)
     .then(response => {
+      console.log(response);
       req.clientGatewayURL = response.clientGatewayURL;
       next();
     })
