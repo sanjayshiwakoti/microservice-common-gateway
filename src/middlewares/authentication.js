@@ -16,7 +16,7 @@ export const authenticate = (req, res, next) => {
     .then(response => res.json(response.data) )
   } else {
     let accessToken = req.get('Authorization');
-    
+
     if (accessToken === null) {
       // TODO handle error
       res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Unauthorized' });
@@ -25,9 +25,9 @@ export const authenticate = (req, res, next) => {
     authService
       .authenticate(accessToken)
       .then(response => {
-        console.log(response);
-        //req.clientGatewayURL = response.business_unit_id.businessUnitUrl;
-        req.clientGatewayURL = `http://localhost:8001`;
+        console.log(response)
+        console.log(response.business_unit_id[0].businessUnitUrl)
+        req.clientGatewayURL = response.business_unit_id[0].businessUnitUrl;  //TODO handle array data from url buid
         next();
       })
       .catch(() => {
@@ -36,7 +36,7 @@ export const authenticate = (req, res, next) => {
       });
   }
 
-  
+
 };
 
 const isAuthenticationRequired = url => {
