@@ -8,7 +8,7 @@ const router = Router();
  * GET /api
  */
 router.all('*', (req, res, next) => {
-  req.clientGatewayURL = process.env.MSA_AUTH
+  req.clientGatewayURL = process.env.MSA_AUTH;
   let request = null;
 
   switch (req.method) {
@@ -32,7 +32,9 @@ router.all('*', (req, res, next) => {
       break;
   }
 
-  request.then(response => {console.log('aayo aayo: ' , response.body); res.json({})});
+  request.then(response => {
+    res.json({});
+  });
 });
 
 export default router;

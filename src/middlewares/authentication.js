@@ -5,15 +5,13 @@ const ROUTES_WITH_NO_AUTHORIZATION_KEY = ['/api/auth/login'];
 
 export const authenticate = (req, res, next) => {
   if (!isAuthenticationRequired(req.url)) {
-
     let credentials = {
       username: req.body.username,
       password: req.body.password,
       slug: req.body.slug
     };
 
-   authService.login(credentials)
-    .then(response => res.json(response.data) )
+    authService.login(credentials).then(response => res.json(response.data));
   } else {
     let accessToken = req.get('Authorization');
 
@@ -25,9 +23,7 @@ export const authenticate = (req, res, next) => {
     authService
       .authenticate(accessToken)
       .then(response => {
-        console.log(response)
-        console.log(response.business_unit_id[0].businessUnitUrl)
-        req.clientGatewayURL = response.business_unit_id[0].businessUnitUrl;  //TODO handle array data from url buid
+        req.clientGatewayURL = response.business_unit_id[0].businessUnitUrl; // TODO handle array data from url buid
         next();
       })
       .catch(() => {
@@ -35,8 +31,6 @@ export const authenticate = (req, res, next) => {
         res.status(HttpStatus.UNAUTHORIZED).json({ error: 'Unauthorized' });
       });
   }
-
-
 };
 
 const isAuthenticationRequired = url => {
