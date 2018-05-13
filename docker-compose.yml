@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   commaon-gateway:
     container_name: common-gateway
@@ -9,7 +9,7 @@ services:
     image: node:9
     volumes:
       - ./:/app/
-      - .env.docker:/app/.env
+      - .env.example:/app/.env
     ports:
       - "8000:8000"
     entrypoint: /bin/sh
