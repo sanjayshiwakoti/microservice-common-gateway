@@ -1,0 +1,40 @@
+version: '2'
+services:
+    pg:
+        container_name: pg
+        restart: always
+        image: postgres:10
+        expose:
+            - "5432"
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: mysecretpassword
+          POSTGRES_DB: express
+        networks:
+          - evolve
+    # pgadmin:
+    #     container_name: pgadmin
+    #     restart: always
+    #     image: dpage/pgadmin4
+    #     ports:
+    #         - "8090:80"
+    #     environment:
+    #       PGADMIN_DEFAULT_EMAIL: user@domain.com
+    #       PGADMIN_DEFAULT_PASSWORD: SuperSecret
+    #     networks:
+    #       - evolve
+    nginx-proxy:
+        container_name: nginx-proxy
+        restart: always
+        image: jwilder/nginx-proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+           - /var/run/certs:/etc/nginx/certs
+           - /var/run/docker.sock:/tmp/docker.sock:ro
+        networks:
+           - evolve
+networks:
+  evolve:
+    external: true
