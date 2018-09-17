@@ -3,7 +3,7 @@ services:
   commaon-gateway:
     container_name: common-gateway
     environment:
-      - VIRTUAL_HOST=msa.rosia
+      - VIRTUAL_HOST=msa.microservice
       - VIRTUAL_PORT="8000"
     #build: .
     image: node:9
