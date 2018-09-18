@@ -34,7 +34,7 @@ router.all('*', (req, res, next) => {
 
   request
     .then(response => res.status(response.status).json(response.data))
-    .catch(e => res.status(HttpStatus.BAD_REQUEST));
+    .catch(e => res.status(HttpStatus.BAD_REQUEST).json(e.error));
 });
 
 export default router;

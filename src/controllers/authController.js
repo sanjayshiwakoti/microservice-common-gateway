@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { Router } from 'express';
-import HttpStatus from 'http-status-codes';
 
 const router = Router();
 
@@ -33,7 +32,7 @@ router.all('*', (req, res, next) => {
   }
 
   request.then(response => {
-    res.json({});
+    res.json({ response });
   });
 });
 

@@ -11,7 +11,13 @@ export const authenticate = (req, res, next) => {
       slug: req.body.slug
     };
 
-    authService.login(credentials).then(response => res.json(response.data));
+    authService
+      .login(credentials)
+      .then(response => res.json(response.data))
+      .catch(err => {
+        // TODO handle error
+        res.status(err.response.status).json({ error: err.response.statusText });
+      });
   } else {
     let accessToken = req.get('Authorization');
 
